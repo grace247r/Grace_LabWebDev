@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+<div class="dashboard-container">
+  <main class="main-dashboard-content">
+    <section class="dashboard-header">
+      <h2>Pantau & Kirim Evaluasi</h2>
+      <p>Lihat status evaluasi dan kirim pengingat ke supervisor.</p>
+    </section>
+    <div class="card-item">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Mahasiswa</th>
+              <th>Perusahaan</th>
+              <th>Supervisor</th>
+              <th>Status Evaluasi</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for magang in magang_list %}
+            <tr>
+              <td>{{ magang.mahasiswa.user.get_full_name }}</td>
+              <td>{{ magang.nama_perusahaan }}</td>
+              <td>{{ magang.email_supervisor }}</td>
+              <td>
+                {% if magang.evaluasi %}
+                <span class="badge bg-success">Sudah Mengisi</span>
+                {% else %}
+                <span class="badge bg-warning text-dark">Belum Mengisi</span>
+                {% endif %}
+              </td>
+              <td>
+                <button class="btn btn-sm btn-primary" disabled>
+                  Kirim Pengingat
+                </button>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="text-center">
+                Tidak ada data magang yang sedang berjalan.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

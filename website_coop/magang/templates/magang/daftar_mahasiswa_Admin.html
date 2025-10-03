@@ -1,0 +1,68 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+            <h2 class="mb-4 section-title">Daftar Mahasiswa COOP</h2>
+
+            <div class="btn-group mb-4" role="group">
+                <a href="{% url 'magang:admin_daftar_mahasiswa' %}?status=semua" 
+                   class="btn {% if status_filter == 'semua' %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                    Semua ({{ mahasiswa_list.count }})
+                </a>
+                <a href="{% url 'magang:admin_daftar_mahasiswa' %}?status=sudah" 
+                   class="btn {% if status_filter == 'sudah' %}btn-success{% else %}btn-outline-success{% endif %}">
+                    Sudah Terkonfirmasi
+                </a>
+                <a href="{% url 'magang:admin_daftar_mahasiswa' %}?status=belum" 
+                   class="btn {% if status_filter == 'belum' %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                    Belum Terkonfirmasi
+                </a>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>NIM</th>
+                                <th>Nama Lengkap</th>
+                                <th>Program Studi</th>
+                                <th>Angkatan</th>
+                                <th>Status Konfirmasi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for m in mahasiswa_list %}
+                            <tr>
+                                <td>{{ m.nim }}</td>
+                                <td>{{ m.user.get_full_name }}</td>
+                                <td>{{ m.program_studi }}</td>
+                                <td>{{ m.angkatan }}</td>
+                                <td>
+                                    {% if m.magang.status == 'Berjalan' %}
+                                        <span class="badge bg-success">Terkonfirmasi</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">Belum</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-info text-white">Lihat Profil</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center py-4">Tidak ada data mahasiswa yang ditemukan.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

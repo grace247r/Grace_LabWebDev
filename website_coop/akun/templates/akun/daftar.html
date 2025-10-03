@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+  <form method="post" enctype="multipart/form-data" class="registration-form">
+    {% csrf_token %}
+    
+    <div class="form-header">
+      <h2>Buat Akun Baru</h2>
+      <p>Silakan isi form di bawah ini untuk mendaftar program COOP.</p>
+    </div>
+
+    {% if user_form.non_field_errors %}
+      <div class="alert alert-danger">
+        {% for error in user_form.non_field_errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if profile_form.non_field_errors %}
+      <div class="alert alert-danger">
+        {% for error in profile_form.non_field_errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+
+    <div class="form-row main-columns">
+      
+      <div class="form-column">
+        <h3>Data Akun</h3>
+        <div class="form-group">
+          <label for="{{ user_form.username.id_for_label }}">Username</label>
+          {{ user_form.username }}
+          <div class="text-danger small">{{ user_form.username.errors }}</div> </div>
+        <div class="form-group">
+          <label for="{{ user_form.first_name.id_for_label }}">Nama Depan</label>
+          {{ user_form.first_name }}
+          <div class="text-danger small">{{ user_form.first_name.errors }}</div> </div>
+        <div class="form-group">
+            <label for="{{ user_form.last_name.id_for_label }}">Nama Belakang</label>
+            {{ user_form.last_name }}
+            <div class="text-danger small">{{ user_form.last_name.errors }}</div> </div>
+        <div class="form-group">
+          <label for="{{ user_form.email.id_for_label }}">Email</label>
+          {{ user_form.email }}
+          <div class="text-danger small">{{ user_form.email.errors }}</div> </div>
+        <div class="form-group">
+          <label for="{{ user_form.password.id_for_label }}">Password</label>
+          {{ user_form.password }}
+          <div class="text-danger small">{{ user_form.password.errors }}</div> </div>
+        <div class="form-group">
+          <label for="{{ user_form.password2.id_for_label }}">Konfirmasi Password</label>
+          {{ user_form.password2 }}
+          <div class="text-danger small">{{ user_form.password2.errors }}</div> </div>
+      </div>
+      
+      <div class="form-column">
+        <h3>Data Mahasiswa</h3>
+        <div class="form-group">
+            <label for="{{ profile_form.email_outlook.id_for_label }}">Email Outlook</label>
+            {{ profile_form.email_outlook }}
+            <div class="text-danger small">{{ profile_form.email_outlook.errors }}</div> </div>
+        <div class="form-group">
+            <label for="{{ profile_form.nim.id_for_label }}">NIM</label>
+            {{ profile_form.nim }}
+            <div class="text-danger small">{{ profile_form.nim.errors }}</div> </div>
+        <div class="form-group">
+            <label for="{{ profile_form.program_studi.id_for_label }}">Program Studi</label>
+            {{ profile_form.program_studi }}
+            <div class="text-danger small">{{ profile_form.program_studi.errors }}</div> </div>
+         <div class="form-group">
+            <label for="{{ profile_form.angkatan.id_for_label }}">Angkatan</label>
+            {{ profile_form.angkatan }}
+            <div class="text-danger small">{{ profile_form.angkatan.errors }}</div> </div>
+        <div class="form-group">
+            <label for="{{ profile_form.kontak_wa.id_for_label }}">Kontak WA</label>
+            {{ profile_form.kontak_wa }}
+            <div class="text-danger small">{{ profile_form.kontak_wa.errors }}</div> </div>
+        <div class="form-group">
+            <label for="{{ profile_form.jenis_kelamin.id_for_label }}">Jenis Kelamin</label>
+            {{ profile_form.jenis_kelamin }}
+            <div class="text-danger small">{{ profile_form.jenis_kelamin.errors }}</div> </div>
+      </div>
+    </div>
+
+    <div class="upload-section">
+        <h3>Dokumen Pendukung</h3>
+        <div class="form-row">
+            <div class="form-column">
+                <div class="form-group">
+                    <label for="{{ profile_form.bukti_konsultasi.id_for_label }}">Upload Bukti Konsultasi</label>
+                    {{ profile_form.bukti_konsultasi }}
+                    <div class="text-danger small">{{ profile_form.bukti_konsultasi.errors }}</div> </div>
+            </div>
+            <div class="form-column">
+                 <div class="form-group">
+                    <label for="{{ profile_form.sptjm.id_for_label }}">Upload Bukti SPTJM</label>
+                    {{ profile_form.sptjm }}
+                    <div class="text-danger small">{{ profile_form.sptjm.errors }}</div> </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Daftar</button>
+  </form>
+</div>
+{% endblock %}

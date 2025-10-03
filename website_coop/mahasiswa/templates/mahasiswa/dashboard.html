@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - COOP Portal</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body style="background-color: white">
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="sidebar-profile">
+          <div class="avatar">{{ user.first_name|first }}</div>
+          <div class="profile-info">
+            <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+            <small>{{ profile.nim }}</small>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li class="active">
+              <a href="#"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+            </li>
+            <li>
+              <a href="{% url 'mahasiswa:profil' %}"
+                ><i class="bi bi-person-fill"></i> Profil</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'notifikasi:daftar_notifikasi' %}"
+                ><i class="bi bi-bell-fill"></i> Notifikasi</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'mahasiswa:sertifikat' %}"
+                ><i class="bi bi-patch-check-fill"></i> Sertifikat</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <div class="sidebar-logout">
+          <a href="#" class="btn btn-outline-dark">Logout</a>
+        </div>
+      </aside>
+
+      <main class="main-dashboard-content">
+        <section class="dashboard-header hero-container-db">
+          <h2>Selamat Datang, {{ user.first_name }}!</h2>
+          <p>Kelola semua aktivitas program COOP Anda dari sini.</p>
+        </section>
+
+        <section>
+          <h3 class="section-title">Aksi Cepat</h3>
+          <div class="card-grid">
+            <a href="{% url 'mahasiswa:unggah_berkas' %}" class="card-link"
+              ><div class="card-item">
+                <i class="bi bi-file-earmark-arrow-up-fill card-icon"></i>
+                <h4>Unggah Berkas</h4>
+                <p>Lengkapi profil Anda.</p>
+              </div></a
+            >
+            <a href="{% url 'magang:konfirmasi_magang' %}" class="card-link"
+              ><div class="card-item">
+                <i class="bi bi-building-fill-check card-icon"></i>
+                <h4>Konfirmasi Magang</h4>
+                <p>Laporkan penerimaan magang.</p>
+              </div></a
+            >
+
+            <a
+              href="{% url 'mahasiswa:form_lapor_mingguan' %}"
+              class="card-link"
+              ><div class="card-item">
+                <i class="bi bi-search card-icon"></i>
+                <h4>Laporan Pencarian</h4>
+                <p>Update progres pencarian.</p>
+              </div></a
+            >
+            <a href="{% url 'magang:submit_laporan_magang' jenis_laporan='BULANAN' %}" class="card-link"
+              ><div class="card-item">
+                <i class="bi bi-journal-text card-icon"></i>
+                <h4>Laporan Magang</h4>
+                <p>Isi laporan kemajuan bulanan.</p>
+              </div></a
+            >
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <h3 class="section-title">Lowongan Terbaru</h3>
+            <a href="{% url 'magang:daftar_lowongan' %}"  class="view-all-link">Lihat Lebih Lengkap &rarr;</a>
+          </div>
+          <div class="card-grid">
+            <a href="#" class="card-link"
+              ><div class="card-item job-card">
+                <img
+                  src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/9-tokopedia.jpeg"
+                  alt="Tokopedia Logo"
+                />
+                <h5>UI/UX Designer Intern</h5>
+                <p>Tokopedia</p>
+              </div></a
+            >
+            <a href="#" class="card-link"
+              ><div class="card-item job-card">
+                <img
+                  src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/25-bca.jpeg"
+                  alt="BCA Logo"
+                />
+                <h5>Data Analyst Intern</h5>
+                <p>Bank Central Asia</p>
+              </div></a
+            >
+            <a href="#" class="card-link"
+              ><div class="card-item job-card">
+                <img
+                  src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/23-astra.jpeg"
+                  alt="Astra Logo"
+                />
+                <h5>Software Engineer Intern</h5>
+                <p>Astra International</p>
+              </div></a
+            >
+            <a href="#" class="card-link"
+              ><div class="card-item job-card">
+                <img
+                  src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/31-Honda.png"
+                  alt="Honda Logo"
+                />
+                <h5>Mechanical Engineer Intern</h5>
+                <p>Honda</p>
+              </div></a
+            >
+          </div>
+        </section>
+
+        <section>
+          <h3 class="section-title">Progres Program COOP Anda</h3>
+          <div class="progress-container">
+            <div class="progress-step completed">
+              <div class="step-circle">✓</div>
+              <p>Registrasi</p>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step active">
+              <div class="step-circle">2</div>
+              <p>Konfirmasi Magang</p>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+              <div class="step-circle">3</div>
+              <p>Laporan Bulanan</p>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+              <div class="step-circle">4</div>
+              <p>Program Selesai</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

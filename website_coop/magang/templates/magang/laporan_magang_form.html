@@ -1,0 +1,124 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data" class="registration-form">
+    {% csrf_token %}
+
+    <div class="form-header">
+      <h2>Form Laporan Magang</h2>
+      <p>Lengkapi rincian kegiatan dan refleksi Anda.</p>
+      
+      <div class="btn-group mb-3 mt-3" role="group" aria-label="Laporan Magang Switcher">
+        <a href="{% url 'magang:submit_laporan_magang' jenis_laporan='BULANAN' %}"
+           class="btn {% if is_bulanan %}btn-success{% else %}btn-outline-success{% endif %}">
+          Laporan Bulanan (Kemajuan)
+        </a>
+        <a href="{% url 'magang:submit_laporan_magang' jenis_laporan='AKHIR' %}"
+           class="btn {% if not is_bulanan %}btn-success{% else %}btn-outline-success{% endif %}">
+          Laporan Akhir (UAS)
+        </a>
+      </div>
+    </div>
+
+    <div class="form-row main-columns">
+      <div class="form-column">
+        <h3>Informasi Umum</h3>
+        
+        <div class="form-group">
+          <label>Mahasiswa</label>
+          <input type="text" class="form-control" value="{{ request.user.get_full_name }}" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>Perusahaan</label>
+          <input type="text" class="form-control" value="{{ magang_instance.nama_perusahaan }}" disabled>
+        </div>
+
+        {% if is_bulanan %}
+        <div class="form-group">
+          <label for="{{ form.bulan_ke.id_for_label }}">Bulan Ke-</label>
+          {{ form.bulan_ke }}
+          <div class="text-danger small">{{ form.bulan_ke.errors }}</div>
+          <small class="form-text text-muted">{{ form.bulan_ke.help_text }}</small>
+        </div>
+        {% else %}
+        <div class="form-group">
+          <label>Jenis Laporan</label>
+          <input type="text" class="form-control" value="Laporan Akhir (UAS)" disabled>
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+          <label for="{{ form.profil_perusahaan.id_for_label }}">Profil Singkat Perusahaan</label>
+          {{ form.profil_perusahaan }}
+          <div class="text-danger small">{{ form.profil_perusahaan.errors }}</div>
+        </div>
+      </div>
+
+      <div class="form-column">
+        <h3>Kegiatan & Tugas</h3>
+        
+        <div class="form-group">
+          <label for="{{ form.jobdesk.id_for_label }}">Jobdesk / Tugas yang Dikerjakan</label>
+          {{ form.jobdesk }}
+          <div class="text-danger small">{{ form.jobdesk.errors }}</div>
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.suasana_kerja.id_for_label }}">Suasana Lingkungan Pekerjaan</label>
+          {{ form.suasana_kerja }}
+          <div class="text-danger small">{{ form.suasana_kerja.errors }}</div>
+        </div>
+      </div>
+
+      <div class="form-column">
+        <h3>Refleksi & Evaluasi</h3>
+        
+        <div class="form-group">
+          <label for="{{ form.pengetahuan_bermanfaat.id_for_label }}">Pengetahuan dari Kampus yang Bermanfaat</label>
+          {{ form.pengetahuan_bermanfaat }}
+          <div class="text-danger small">{{ form.pengetahuan_bermanfaat.errors }}</div>
+          <small class="form-text text-muted">{{ form.pengetahuan_bermanfaat.help_text }}</small>
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.pengetahuan_kurang.id_for_label }}">Pengetahuan yang Perlu Ditambahkan</label>
+          {{ form.pengetahuan_kurang }}
+          <div class="text-danger small">{{ form.pengetahuan_kurang.errors }}</div>
+          <small class="form-text text-muted">{{ form.pengetahuan_kurang.help_text }}</small>
+        </div>
+      </div>
+    </div>
+
+    {% if not is_bulanan %}
+    <div class="upload-section">
+      <h3>Dokumen Laporan Akhir</h3>
+      <div class="form-row">
+        <div class="form-column">
+          <div class="form-group">
+            <label for="{{ form.dokumen_laporan.id_for_label }}">Upload Dokumen Laporan Akhir (PDF)</label>
+            {{ form.dokumen_laporan }}
+            <div class="text-danger small">{{ form.dokumen_laporan.errors }}</div>
+            <small class="form-text text-muted">{{ form.dokumen_laporan.help_text }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <button type="submit" class="submit-btn">
+      Simpan Laporan {% if is_bulanan %}Bulanan{% else %}Akhir{% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}

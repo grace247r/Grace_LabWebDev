@@ -1,0 +1,109 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="form-container">
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data" class="registration-form">
+    {% csrf_token %}
+
+    <div class="form-header">
+      <h2>Konfirmasi Berkas Magang</h2>
+      <p>Silakan isi form di bawah ini untuk konfirmasi magang.</p>
+    </div>
+
+    <div class="form-row main-columns">
+      <div class="form-column">
+        <h3>Data Mahasiswa</h3>
+        <div class="form-group">
+          <label for="{{ form.periode_magang.id_for_label }}"
+            >Periode Magang</label
+          >
+          {{ form.periode_magang }}
+          <div class="text-danger small">{{ form.periode_magang.errors }}</div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.posisi.id_for_label }}"
+            >Posisi yang Dilamar</label
+          >
+          {{ form.posisi }}
+          <div class="text-danger small">{{ form.posisi.errors }}</div>
+        </div>
+      </div>
+
+      <div class="form-column">
+        <h3>Data Perusahaan</h3>
+        <div class="form-group">
+          <label for="{{ form.nama_perusahaan.id_for_label }}"
+            >Nama Perusahaan</label
+          >
+          {{ form.nama_perusahaan }}
+          <div class="text-danger small">{{ form.nama_perusahaan.errors }}</div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.bidang_usaha.id_for_label }}">Bidang Usaha</label>
+          {{ form.bidang_usaha }}
+          <div class="text-danger small">{{ form.bidang_usaha.errors }}</div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.alamat_perusahaan.id_for_label }}"
+            >Alamat Perusahaan</label
+          >
+          {{ form.alamat_perusahaan }}
+          <div class="text-danger small">
+            {{ form.alamat_perusahaan.errors }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.nama_supervisor.id_for_label }}"
+            >Nama Supervisor</label
+          >
+          {{ form.nama_supervisor }}
+          <div class="text-danger small">{{ form.nama_supervisor.errors }}</div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.email_supervisor.id_for_label }}"
+            >Email Supervisor</label
+          >
+          {{ form.email_supervisor }}
+          <div class="text-danger small">
+            {{ form.email_supervisor.errors }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.kontak_wa_supervisor.id_for_label }}"
+            >Kontak WA Supervisor</label
+          >
+          {{ form.kontak_wa_supervisor }}
+          <div class="text-danger small">
+            {{ form.kontak_wa_supervisor.errors }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-section">
+      <h3>Dokumen Pendukung</h3>
+      <div class="form-row">
+        <div class="form-column">
+          <div class="form-group">
+            <label for="{{ form.surat_penerimaan.id_for_label }}"
+              >Upload Surat Penerimaan</label
+            >
+            {{ form.surat_penerimaan }}
+            <div class="text-danger small">
+              {{ form.surat_penerimaan.errors }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Konfirmasi</button>
+  </form>
+</div>
+{% endblock %}

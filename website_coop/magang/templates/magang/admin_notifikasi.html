@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="sidebar-profile">
+            <div class="avatar" style="background-color: #00376a">{{ user.first_name|first }}</div>
+            <div class="profile-info">
+                <strong>{{ user.get_full_name }}</strong>
+                <small>Admin COOP</small>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="{% url 'magang:admin_dashboard' %}"><i class="bi bi-speedometer2"></i> Dashboard Admin</a></li>
+                <li><a href="{% url 'magang:admin_profil' %}"><i class="bi bi-person-circle"></i> Profil</a></li>
+                <li class="active"><a href="{% url 'magang:admin_notifikasi' %}"><i class="bi bi-bell-fill"></i> Notifikasi</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-logout">...</div>
+    </aside>
+
+    <main class="main-dashboard-content">
+        <section class="dashboard-header">
+            <h2>Semua Notifikasi</h2>
+            <p>Riwayat semua notifikasi yang dikirimkan dalam sistem.</p>
+        </section>
+
+        <div class="card-item">
+            <ul class="list-group list-group-flush">
+                {% for notif in notifikasi_list %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">
+                                Notifikasi untuk: {{ notif.user.username }}
+                            </div>
+                            {{ notif.pesan }}
+                        </div>
+                        <small class="text-muted">{{ notif.waktu_kirim|timesince }} yang lalu</small>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">Tidak ada notifikasi di dalam sistem.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-profile">
+            <div class="avatar bg-primary">{{ user.first_name|first }}</div>
+            <div class="profile-info">
+                <strong>PT. Global Tech</strong>
+                <small>Software Company</small>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="{% url 'perusahaan:dashboard' %}"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditProfil">
+                        <i class="bi bi-building-fill"></i> Info Perusahaan
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{% url 'notifikasi:daftar_notifikasi' %}"><i class="bi bi-bell-fill"></i> Notifikasi</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-logout">
+            <a href="#" class="btn btn-outline-dark">Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-dashboard-content">
+        <section class="dashboard-header hero-container-db">
+            <h2>Notifikasi</h2>
+            <p>Lihat semua pemberitahuan dan update terbaru.</p>
+        </section>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                {% if notifikasi_list %}
+                    <div class="list-group list-group-flush">
+                        {% for notif in notifikasi_list %}
+                        <div class="list-group-item d-flex align-items-start py-3 {% if not notif.sudah_dibaca %}bg-light{% endif %}">
+                            <div class="ms-2 me-auto">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <div>
+                                        {% if not notif.sudah_dibaca %}
+                                            <span class="badge bg-primary me-2">Baru</span>
+                                        {% endif %}
+                                        {{ notif.pesan }}
+                                    </div>
+                                    <small class="text-muted ms-3">{{ notif.waktu_kirim|timesince }} yang lalu</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-bell-slash display-4 text-muted"></i>
+                        <p class="mt-3 text-muted">Belum ada notifikasi baru</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Modal Info Perusahaan -->
+<div class="modal fade" id="modalEditProfil" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Info Perusahaan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Nama Perusahaan</label>
+                        <input type="text" class="form-control" value="PT. Global Tech" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bidang Usaha</label>
+                        <input type="text" class="form-control" value="Software Development" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Alamat</label>
+                        <input type="text" class="form-control" value="Jl. Teknologi No. 123, Jakarta" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" value="recruitment@globaltech.com" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Telepon</label>
+                        <input type="tel" class="form-control" value="(021) 555-0123" readonly>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

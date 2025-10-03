@@ -1,0 +1,68 @@
+]{% extends "base.html" %} {% load static %} {% block content %}
+<div class="form-container">
+  <div class="form-header">
+    <h2>Daftar Lowongan Magang</h2>
+    <p>Total ditemukan: {{ lowongan_list|length }} lowongan</p>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-box">
+    <form method="GET" action="{% url 'magang:daftar_lowongan' %}">
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          name="q"
+          class="search-field"
+          placeholder="Cari posisi, perusahaan, atau bidang studi..."
+          value="{{ query|default_if_none:'' }}"
+        />
+        <button class="btn-search" type="submit">Cari</button>
+        {% if query %}
+        <a href="{% url 'magang:daftar_lowongan' %}" class="btn-reset">Reset</a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+
+  <!-- Lowongan Cards Grid -->
+  <div class="lowongan-list">
+    {% for lowongan in lowongan_list %}
+    <div class="lowongan-item">
+      <div class="lowongan-content">
+        <h3>{{ lowongan.posisi }}</h3>
+        <p class="company-name">{{ lowongan.nama_perusahaan }}</p>
+        <span class="badge-label">{{ lowongan.bidang_studi }}</span>
+
+        <p class="description-text">
+          {{ lowongan.deskripsi|truncatewords:15 }}
+        </p>
+      </div>
+      <div class="lowongan-footer">
+        <a
+          href="{% if lowongan.pk %}{% url 'magang:detail_lowongan' pk=lowongan.pk %}{% else %}#{% endif %}"
+          class="btn-lihat-detail"
+          >Lihat Detail</a
+        >
+        <small class="date-text"
+          >{{ lowongan.tanggal_posting|date:"j M Y" }}</small
+        >
+      </div>
+    </div>
+    {% empty %}
+    <div class="empty-state">
+      <i class="bi bi-inbox" style="font-size: 3rem; color: #ccc"></i>
+      <h4>Tidak ada lowongan yang sesuai</h4>
+      {% if query %}
+      <a
+        href="{% url 'magang:daftar_lowongan' %}"
+        class="submit-btn"
+        style="margin-top: 20px"
+        >Tampilkan Semua</a
+      >
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

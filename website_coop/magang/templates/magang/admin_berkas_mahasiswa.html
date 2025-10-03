@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard-container">
+    <main class="main-dashboard-content">
+        <section class="dashboard-header">
+            <h2>Berkas Mahasiswa</h2>
+            <p>Akses dan unduh berkas penting mahasiswa yang telah terkonfirmasi.</p>
+        </section>
+        <div class="card-item">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nama Mahasiswa</th>
+                            <th>NIM</th>
+                            <th>Perusahaan</th>
+                            <th>Berkas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mhs in mahasiswa_list %}
+                        <tr>
+                            <td>{{ mhs.user.get_full_name }}</td>
+                            <td>{{ mhs.nim }}</td>
+                            <td>{{ mhs.magang.nama_perusahaan }}</td>
+                            <td>
+                                {% if mhs.cv %}<a href="{{ mhs.cv.url }}" class="btn btn-sm btn-outline-secondary" target="_blank">CV</a>{% endif %}
+                                {% if mhs.portofolio %}<a href="{{ mhs.portofolio.url }}" class="btn btn-sm btn-outline-secondary" target="_blank">Portofolio</a>{% endif %}
+                                {% if mhs.magang.surat_penerimaan %}<a href="{{ mhs.magang.surat_penerimaan.url }}" class="btn btn-sm btn-outline-info" target="_blank">Surat Penerimaan</a>{% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center">Belum ada mahasiswa yang mengunggah berkas.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

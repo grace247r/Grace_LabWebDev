@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard-container">
+    <main class="main-dashboard-content">
+        <section class="dashboard-header">
+            <h2>Kelola Lowongan</h2>
+            <p>Lihat semua lowongan yang diposting oleh perusahaan mitra.</p>
+        </section>
+        <div class="card-item">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Posisi</th>
+                            <th>Perusahaan</th>
+                            <th>Tanggal Posting</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for lowongan in lowongan_list %}
+                        <tr>
+                            <td>{{ lowongan.posisi }}</td>
+                            <td>{{ lowongan.nama_perusahaan }}</td>
+                            <td>{{ lowongan.tanggal_posting|date:"d M Y" }}</td>
+                            <td>
+                                {% if lowongan.is_active %}
+                                    <span class="badge bg-success">Aktif</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Non-Aktif</span>
+                                {% endif %}  </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

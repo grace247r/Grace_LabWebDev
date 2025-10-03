@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-md-11">
+      <div class="card shadow-sm mb-4 p-4">
+        <div class="d-flex align-items-center">
+          <div>
+            <h1 class="h3 mb-1">{{ lowongan.posisi }}</h1>
+            <p class="lead text-muted mb-2">{{ lowongan.nama_perusahaan }}</p>
+            <span class="badge bg-primary me-2"
+              >{{ lowongan.bidang_studi }}</span
+            >
+            <small class="text-muted"
+              >Diposting: {{ lowongan.tanggal_posting|date:"j F Y" }}</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-lg border-0 p-5">
+        <h3 class="mb-4 section-title border-bottom pb-2">
+          Deskripsi Pekerjaan
+        </h3>
+
+        <div class="lowongan-deskripsi mb-5">
+          {{ lowongan.deskripsi|linebreaksbr|default:"Deskripsi pekerjaan belum
+          tersedia." }}
+        </div>
+
+        <h3 class="mb-4 section-title border-bottom pb-2">
+          Kualifikasi yang Dibutuhkan
+        </h3>
+
+        <div class="lowongan-kualifikasi mb-5">
+          {{ lowongan.kualifikasi|linebreaksbr|default:"Kualifikasi spesifik
+          belum dicantumkan oleh perusahaan." }}
+        </div>
+
+        <h3 class="mb-4 section-title border-bottom pb-2">
+          Informasi Tambahan
+        </h3>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <strong>Lokasi Magang:</strong>
+            <p>{{ lowongan.lokasi|default:"Tidak disebutkan" }}</p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Periode Magang:</strong>
+            <p>{{ lowongan.periode|default:"Minimal 6 Bulan" }}</p>
+          </div>
+        </div>
+
+        <hr class="mt-4" />
+
+        <div class="mt-4 text-end">
+          <button class="btn btn-success btn-lg me-3" disabled>
+            Fitur Apply Belum Tersedia
+          </button>
+
+          <a
+            href="{% url 'magang:daftar_lowongan' %}"
+            class="btn btn-outline-secondary"
+          >
+            &larr; Kembali ke Daftar Lowongan
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

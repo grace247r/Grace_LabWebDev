@@ -1,0 +1,124 @@
+{% extends 'base.html' %} {% block content %}
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="avatar" style="background-color: #00376a">
+        {{ user.first_name|first }}
+      </div>
+      <div class="profile-info">
+        <strong>{{ user.get_full_name }}</strong>
+        <small>Admin COOP</small>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="active">
+          <a href="{% url 'magang:admin_dashboard' %}">
+            <i class="bi bi-speedometer2"></i> Dashboard Admin
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'magang:admin_profil' %}">
+            <i class="bi bi-person-circle"></i> Profil
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'magang:admin_notifikasi' %}">
+            <i class="bi bi-bell-fill"></i> Notifikasi
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-logout">
+      <form method="post" action="#">
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="btn"
+          style="background-color: #00376a; color: #fff"
+        >
+          Logout
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <main class="main-dashboard-content">
+    <section class="dashboard-header hero-container-db">
+      <h2>Selamat Datang, Admin COOP!</h2>
+      <p>
+        Panel Kontrol untuk mengawasi status COOP, berkas, dan evaluasi
+        mahasiswa.
+      </p>
+    </section>
+
+    <section>
+      <h3 class="section-title">Status COOP</h3>
+      <div class="card-grid">
+        <div class="card-item bg-light-blue">
+          <i class="bi bi-people-fill card-icon text-primary"></i>
+          <h4>Total Mahasiswa</h4>
+          <p class="h1 mb-0">{{ total_mahasiswa }}</p>
+        </div>
+
+        <div class="card-item bg-light-green">
+          <i class="bi bi-check-circle-fill card-icon text-success"></i>
+          <h4>Sudah Terkonfirmasi</h4>
+          <p class="h1 mb-0">{{ mahasiswa_terkonfirmasi }}</p>
+        </div>
+
+        <div class="card-item bg-light-red">
+          <i class="bi bi-x-circle-fill card-icon text-danger"></i>
+          <h4>Belum Terkonfirmasi</h4>
+          <p class="h1 mb-0">{{ mahasiswa_belum_konfirmasi }}</p>
+        </div>
+
+        <div class="card-item bg-light-yellow">
+          <i class="bi bi-briefcase-fill card-icon text-warning"></i>
+          <h4>Lowongan Aktif</h4>
+          <p class="h1 mb-0">{{ lowongan_aktif }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="section-title mt-4">Tugas Administrasi</h3>
+      <div class="card-grid">
+        <a href="{% url 'magang:admin_daftar_mahasiswa' %}" class="card-link">
+          <div class="card-item">
+            <i class="bi bi-list-check card-icon"></i>
+            <h4>Cek Status Konfirmasi</h4>
+            <p>Lihat siapa yang sudah & belum mendapatkan tempat magang.</p>
+          </div>
+        </a>
+
+        <a href="{% url 'magang:admin_berkas_mahasiswa' %}" class="card-link">
+          <div class="card-item">
+            <i class="bi bi-file-earmark-arrow-down-fill card-icon"></i>
+            <h4>Download Berkas Mahasiswa</h4>
+            <p>Akses dan unduh CV, Portofolio, dan Surat Penerimaan.</p>
+          </div>
+        </a>
+
+        <a href="{% url 'magang:admin_pantau_evaluasi' %}" class="card-link">
+          <div class="card-item">
+            <i class="bi bi-send-fill card-icon"></i>
+            <h4>Kirim Evaluasi ke Supervisor</h4>
+            <p>Pantau & kirim form evaluasi UTS/UAS secara otomatis.</p>
+          </div>
+        </a>
+
+        <a href="{% url 'magang:admin_kelola_lowongan' %}" class="card-link">
+          <div class="card-item">
+            <i class="bi bi-pencil-square card-icon"></i>
+            <h4>Edit Lowongan</h4>
+            <p>Tambah, edit, atau nonaktifkan lowongan magang.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+</div>
+{% endblock %}

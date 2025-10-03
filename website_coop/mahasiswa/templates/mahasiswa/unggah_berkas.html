@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="upload-page-container">
+    <div class="card-item upload-card">
+        
+        <div class="form-header text-cen</div>ter">
+            <h2>Unggah Berkas</h2>
+            <p>Lengkapi profil Anda dengan mengunggah CV dan Portofolio terbaru.</p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="form-row mt-4">
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="{{ form.cv.id_for_label }}">Curriculum Vitae (CV)</label>
+                        {{ form.cv }}
+                    </div>
+                </div>
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="{{ form.portofolio.id_for_label }}">Portofolio</label>
+                        {{ form.portofolio }}
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn mt-4">Simpan Berkas</button>
+        </form>
+
+        <hr class="my-5">
+
+        <div class="status-section">
+            <h3 class="section-title text-center">Status Berkas Saat Ini</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    CV
+                    {% if profile.cv %}
+                        <a href="{{ profile.cv.url }}" target="_blank" class="badge bg-success rounded-pill">Sudah Diunggah (Lihat)</a>
+                    {% else %}
+                        <span class="badge bg-danger rounded-pill">Belum Diunggah</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Portofolio
+                    {% if profile.portofolio %}
+                        <a href="{{ profile.portofolio.url }}" target="_blank" class="badge bg-success rounded-pill">Sudah Diunggah (Lihat)</a>
+                    {% else %}
+                        <span class="badge bg-danger rounded-pill">Belum Diunggah</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

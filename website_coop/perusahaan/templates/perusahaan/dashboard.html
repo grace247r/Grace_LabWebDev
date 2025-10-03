@@ -1,0 +1,131 @@
+{% extends "base.html" %} {% block content %}
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="avatar bg-primary">
+        {{ user.first_name|first|default:user.username.0|upper }}
+      </div>
+      <div class="profile-info">
+        <strong>{{ user.get_full_name|default:user.username }}</strong>
+        <small>Perusahaan</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="active">
+          <a href="{% url 'perusahaan:dashboard' %}"
+            ><i class="bi bi-speedometer2"></i> Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="#"><i class="bi bi-star-fill"></i> Evaluasi Mahasiswa</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-logout">
+      <a href="#" class="btn btn-danger">Logout</a>
+    </div>
+  </aside>
+
+  <main class="main-dashboard-content">
+    <section class="dashboard-header">
+      <h2>Selamat Datang, {{ user.get_full_name|default:user.username }}!</h2>
+      <p>Kelola lowongan dan evaluasi mahasiswa magang Anda di sini.</p>
+    </section>
+
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endfor %} {% endif %}
+
+    <div class="card-grid">
+      <a
+        href="#"
+        class="card-link"
+        data-bs-toggle="modal"
+        data-bs-target="#modalTambahLowongan"
+      >
+        <div class="card-item">
+          <i class="bi bi-plus-circle-fill card-icon"></i>
+          <h4>Input Lowongan Baru</h4>
+          <p>Buat dan publikasikan lowongan magang untuk mahasiswa.</p>
+        </div>
+      </a>
+
+      <a href="{% url 'perusahaan:daftar_evaluasi' %}" class="card-link">
+        <div class="card-item">
+          <i class="bi bi-card-checklist card-icon"></i>
+          <h4>Daftar Evaluasi</h4>
+          <p>Lihat dan isi evaluasi untuk mahasiswa yang sedang magang.</p>
+        </div>
+      </a>
+    </div>
+
+    <section class="mt-5">
+      <h3 class="section-title">Lowongan yang Sudah Diposting</h3>
+      <div class="card-item">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Posisi</th>
+                <th>Tanggal Posting</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for lowongan in lowongan_list %}
+              <tr>
+                <td>{{ lowongan.posisi }}</td>
+                <td>{{ lowongan.tanggal_posting|date:"d M Y" }}</td>
+                <td>
+                  {% if lowongan.is_active %}
+                  <span class="badge bg-success">Aktif</span>
+                  {% else %}
+                  <span class="badge bg-secondary">Non-Aktif</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="3" class="text-center">
+                  Anda belum memposting lowongan apapun.
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal fade" id="modalTambahLowongan" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title">Formulir Lowongan Baru</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">{{ form.as_p }}</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Batal
+          </button>
+          <button type="submit" class="btn btn-primary">Simpan Lowongan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

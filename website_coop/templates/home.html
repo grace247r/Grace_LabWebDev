@@ -1,0 +1,349 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>COOP Portal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+      /* Hover effect for buttons */
+      .btn-custom {
+        color: #00376A;
+        border-color: #00376A;
+        transition: background 0.2s, color 0.2s;
+      }
+      .btn-custom:hover, .btn-custom:focus {
+        background: #00376A;
+        color: #fff;
+      }
+      .btn-primary-custom {
+        background: #00376A;
+        color: #fff;
+        transition: background 0.2s, color 0.2s;
+      }
+      .btn-primary-custom:hover, .btn-primary-custom:focus {
+        background: #00264d;
+        color: #fff;
+      }
+      /* Smooth scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-4">
+            <!-- Logo Kiri -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img
+                    src="https://www.prasetiyamulya.ac.id/wp-content/uploads/2020/01/Logo-Universitas-Prasetiya-Mulya.png"
+                    alt="logo"
+                    style="height: 32px; width: auto;"
+                />
+            </a>
+            <!-- Nav Link Tengah -->
+            <div class="mx-auto">
+              <div class="navbar-nav flex-row gap-3">
+                <a class="nav-link fw-bold" aria-current="page" href="#top" style="color: #00376A;">Beranda</a>
+                <a class="nav-link fw-bold" href="#tentang-coop" style="color: #00376A;">Tentang COOP</a>
+                <a class="nav-link fw-bold" href="#footer" style="color: #00376A;">Kontak</a>
+              </div>
+            </div>
+            <!-- Button Kanan -->
+            <div class="d-flex">
+              <a href="{% url 'akun:login' %}">
+                <button type="button" class="btn btn-custom me-2">Login</button>
+              </a>
+              <a href="{% url 'akun:registrasi' %}">
+                <button type="button" class="btn btn-custom">Daftar</button>
+              </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="top">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+            <div class="row align-items-center w-100">
+                <div class="col-md-6 mb-4 mb-md-0 d-flex justify-content-center">
+                    <img
+                      src="{% static 'images/gambar 1.png' %}"
+                      alt="Young professionals collaborating"
+                      class="img-fluid rounded"
+                      style="max-width: 1000px; width: 100%; height: auto;"
+                    />
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <div class="text w-100">
+                        <h1 class="mb-3">Langkah Awal Karir Profesional Anda Dimulai Di Sini</h1>
+                        <p class="mb-4">
+                            Program COOP Universitas Prasetiya Mulya adalah jembatan antara pendidikan berbasis kelas dan pengalaman kerja praktis di industri terdepan. Bersiaplah untuk dunia kerja, bahkan sebelum Anda lulus.
+                        </p>
+                        <a href="{% url 'akun:registrasi' %}">
+                          <button type="button" class="btn btn-primary-custom">Daftar Sekarang</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+    <section id="tentang-coop">
+      <div class="container mt-5">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 text-center mb-4">
+          <h2>Tentang COOP</h2>
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+          <p class="mx-auto" style="max-width: 450px; text-align: justify;">
+            COOP (Co-operative Education) merupakan program yang menggabungkan pendidikan berbasis kelas dengan pengalaman kerja praktis. Mahasiswa yang mengikuti program ini akan melakukan kerja di perusahaan dalam durasi minimal 1 semester. Melalui COOP, diharapkan nantinya mahasiswa akan lebih siap dalam menghadapi dunia kerja setelah lulus karena telah memiliki pengalaman dan keahlian yang dibutuhkan pada saat kerja nanti.
+          </p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center mb-4 mb-md-0">
+          <img src="https://www.sampoernauniversity.ac.id/uploads/Internship-is-Important-for-Students1.jpg" alt="intern" class="img-fluid rounded" style="max-width: 500px;">
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="center py-5">
+      <div class="col-12 text-center mb-4">
+        <h2>Mitra Kami</h2>
+      </div>
+      <div class="container d-flex justify-content-center">
+        <div class="row justify-content-center"></div>
+          <!-- Kolom 1 -->
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center gap-3">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/9-tokopedia.jpeg" alt="Tokopedia" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/10-WAF.jpeg" alt="WAF" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/25-bca.jpeg" alt="BCA" class="img-fluid rounded" style="max-width: 120px;">
+          </div>
+          <!-- Kolom 2 -->
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center gap-3">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/30-bank-mega.jpeg" alt="Bank Mega" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/31-Honda.png" alt="Honda" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/11-IFF.jpeg" alt="IFF" class="img-fluid rounded" style="max-width: 120px;">
+          </div>
+          <!-- Kolom 3 -->
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center gap-3">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/12-Klola.jpeg" alt="Klola" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/13-kresna.jpeg" alt="Kresna" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/14-MNC-Insurance.jpeg" alt="MNC Insurance" class="img-fluid rounded" style="max-width: 120px;">
+          </div>
+          <!-- Kolom 4 -->
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center gap-3">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/15-Zurich.jpeg" alt="Zurich" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/16-lippo-general.jpeg" alt="Lippo General" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/17-prudenetial.jpeg" alt="Prudential" class="img-fluid rounded" style="max-width: 120px;">
+          </div>
+          <!-- Kolom 5 -->
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center gap-3">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/18-rica-rico.jpeg" alt="Rica Rico" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/19-soman.jpeg" alt="Soman" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/20-Taff.jpeg" alt="Taff" class="img-fluid rounded" style="max-width: 120px;">
+          </div>
+          <!-- Kolom 6 -->
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center gap-3">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/21-akura.jpeg" alt="Akura" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/22-askrindo.jpeg" alt="Askrindo" class="img-fluid rounded" style="max-width: 120px;">
+            <img src="https://stem.prasetiyamulya.ac.id/wp-content/uploads/2019/12/23-astra.jpeg" alt="Astra" class="img-fluid rounded" style="max-width: 120px;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="col-12 text-center mb-4">
+      <h2>Langkah-langkah</h2>
+      </div>
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <style>
+          .steps-curve {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            width: 100%;
+            max-width: 950px;
+            margin: 32px auto 32px auto; /* mt-4 mb-4 */
+            position: relative;
+          }
+          .step-item {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 18px;
+            position: relative;
+          }
+          .step-circle {
+            width: 72px;
+            height: 72px;
+            font-size: 2rem;
+            box-shadow: 0 2px 8px #0d6efd33;
+            background: #00376A;
+            color: #fff;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 18px;
+            z-index: 1;
+          }
+          .step-desc {
+            width: 140px;
+            text-align: center;
+            color: #111;
+          }
+          /* Curve effect: adjust margin-top for up-down effect */
+          .step-item:nth-child(1) { margin-top: 40px; }
+          .step-item:nth-child(2) { margin-top: 0px; }
+          .step-item:nth-child(3) { margin-top: 40px; }
+          .step-item:nth-child(4) { margin-top: 0px; }
+          /* Optional: add connecting lines */
+          .steps-curve .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 36px;
+            right: -36px;
+            width: 72px;
+            height: 4px;
+            background: #e0e0e0;
+            z-index: 0;
+            border-radius: 2px;
+            /* For curve effect, use transform */
+            transform: translateY(-18px) rotate(8deg);
+          }
+          .steps-curve .step-item:nth-child(2)::after,
+          .steps-curve .step-item:nth-child(4)::after {
+            transform: translateY(18px) rotate(-8deg);
+          }
+          @media (max-width: 767px) {
+            .steps-curve {
+              flex-direction: column;
+              align-items: center;
+              max-width: 100%;
+              margin: 24px 0 24px 0;
+            }
+            .step-item {
+              margin: 18px 0;
+            }
+            .step-item,
+            .step-desc {
+              width: 100% !important;
+              max-width: 220px;
+            }
+            .steps-curve .step-item::after {
+              display: none;
+            }
+          }
+        </style>
+        <div class="steps-curve">
+          <!-- Step 1 -->
+          <div class="step-item">
+            <div class="step-circle">1</div>
+            <div class="step-desc">
+              <div class="fw-bold">Daftar</div>
+              <div class="small">Buat akun dan lengkapi data diri Anda.</div>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div class="step-item">
+            <div class="step-circle">2</div>
+            <div class="step-desc">
+              <div class="fw-bold">Pilih Program</div>
+              <div class="small">Pilih program COOP yang sesuai minat Anda.</div>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="step-item">
+            <div class="step-circle">3</div>
+            <div class="step-desc">
+              <div class="fw-bold">Magang</div>
+              <div class="small">Mulai pengalaman kerja di perusahaan mitra.</div>
+            </div>
+          </div>
+          <!-- Step 4 -->
+          <div class="step-item">
+            <div class="step-circle">4</div>
+            <div class="step-desc">
+              <div class="fw-bold">Selesai</div>
+              <div class="small">Dapatkan sertifikat dan pengalaman berharga.</div>
+            </div>
+          </div>
+        </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <footer class="bg-light py-4 mt-5 border-top" id="footer">
+      <div class="container">
+      <!-- Logo Prasmul di tengah atas -->
+      <div class="row">
+        <div class="col-12 d-flex justify-content-start mb-3">
+        <img src="https://www.prasetiyamulya.ac.id/wp-content/uploads/2020/01/Logo-Universitas-Prasetiya-Mulya.png" alt="Logo Prasmul" style="height: 48px; width: auto;">
+        </div>
+      </div>
+      <!-- Dua kolom flex, tulisan rata kiri, margin kanan kiri sama -->
+      <div class="row justify-content-center">
+        <!-- Kolom Alamat -->
+        <div class="col-md-6 d-flex flex-column align-items-start text-start px-4 mb-3 mb-md-0">
+          <h6 class="fw-bold">Alamat</h6>
+          <p class="mb-0">
+        Universitas Prasetiya Mulya<br>
+        Jl. BSD Raya Utama, BSD City<br>
+        Tangerang, Banten 15339, Indonesia
+          </p>
+        </div>
+        <!-- Kolom Kontak -->
+        <div class="col-md-6 d-flex flex-column align-items-start text-start px-4">
+          <h6 class="fw-bold">Kontak</h6>
+          <p class="mb-1">
+        <a href="https://wa.me/6281234567890" class="text-decoration-none text-dark" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/whatsapp.svg" alt="WA" style="height: 20px; margin-right: 6px;">+62 812-3456-7890
+        </a>
+          </p>
+          <p class="mb-1">
+        <a href="https://instagram.com/prasmulcoop" class="text-decoration-none text-dark" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/instagram.svg" alt="Instagram" style="height: 20px; margin-right: 6px;">@prasmulcoop
+        </a>
+          </p>
+          <p class="mb-0">
+        <a href="mailto:coop@prasetiyamulya.ac.id" class="text-decoration-none text-dark">
+          <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/envelope.svg" alt="Email" style="height: 20px; margin-right: 6px;">coop@prasetiyamulya.ac.id
+        </a>
+          </p>
+        </div>
+      </div>
+      </div>
+        </footer>
+
+    <script>
+      // Optional: offset for fixed navbar (if needed)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            window.scrollTo({
+              top: target.offsetTop - 20, // adjust offset if navbar is fixed
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
